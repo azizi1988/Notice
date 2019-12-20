@@ -1,0 +1,11 @@
+{% extends 'base.html' %} 
+{% load i18n %} 
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% bootstrap_javascript jquery='full' %}
+{{ form.media }}
+{% csrf_token %}
+{% crispy form %}
+{% endblock %} 

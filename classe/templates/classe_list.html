@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load fontawesome %}
+{% block content%}
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<!--link rel="stylesheet" href="{% static 'css/styles.css' %}"-->
+<caption>listes des classes</caption>
+        <table id ="table_id" class = "table table-bordered">
+            {% fontawesome_stylesheet %}
+        <thead class = "alert-success">
+            <tr>        
+                <td>Etablissement :</td>
+                <td>classe :</td>
+                <td>Action:</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for classe in all_classes %}
+            <tr>     
+                    <td>{{ classe.classe_code}}</td>
+                    <td>{{ classe.classe_desig}}</td>
+                    <td>
+                        <a class="btn btn-info btn-sm"  href="{% url 'classe:classe_update' classe.id %}">{% fontawesome_icon 'pencil' large=True spin=False color='white' title='Modifier' %}</a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'classe:classe_delete' classe.id %}">{% fontawesome_icon 'trash' large=True spin=False color='white' title='Supprimer' %}</a>     
+                        <a class="btn btn-warning btn-sm" href="{% url 'note:note_listing' classe.id %}">{% fontawesome_icon 'clipboard' large=True spin=False color='white' title='les notes'%}</a>  
+                    </td> 
+            </tr>
+           {% endfor %}
+        </tbody>
+        </table> 
+{% endblock %}  
+{% block js %}
+<link rel="stylesheet" type="text/css" href="{% static '/DataTables/datatables.min.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static '/DataTables/datatables.min.css' %}"/>
+<script type="text/javascript" src="{% static '/DataTables/datatables.min.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/af-2.3.3/b-1.5.6/b-colvis-1.5.6/b-html5-1.5.6/b-print-1.5.6/cr-1.5.0/fc-3.2.5/kt-2.5.0/r-2.2.2/rg-1.1.0/rr-1.2.4/sl-1.3.0/datatables.min.css"/>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/af-2.3.3/b-1.5.6/b-colvis-1.5.6/b-html5-1.5.6/b-print-1.5.6/cr-1.5.0/fc-3.2.5/kt-2.5.0/r-2.2.2/rg-1.1.0/rr-1.2.4/sl-1.3.0/datatables.min.js"></script>
+<script>
+    $(document).ready( function () {
+    $('#table_id').DataTable({
+        
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+        },
+    dom: 'B<"clear">lfrtip',
+    buttons:{
+        name: 'primary',
+        buttons: ['copy','csv','excel',{
+            extend: 'pdf',
+            orientation: 'landscape',
+            pageSize: 'LEGAL'
+          }]
+        
+    }}
+    
+    
+    );
+   
+        
+
+    });
+
+ 
+</script>
+{% endblock %}

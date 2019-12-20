@@ -1,0 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 18-10-2019 21:29+0000\n"
+"PO-Revision-Date: DA-MO-YEAR HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: classe/forms.py:16 classe/forms.py:42
+msgid "etablissement:"
+msgstr "المؤسسة"
+
+#: classe/forms.py:17 classe/forms.py:43
+msgid "classe Designation:"
+msgstr "القسم"
+
+#: enseignant/forms.py:15 enseignant/forms.py:42
+msgid "Enseignant:"
+msgstr "الاستاذ"
+
+#: enseignant/forms.py:16 enseignant/forms.py:43 note/forms.py:19
+#: note/forms.py:57 note/forms.py:94
+msgid "classe:"
+msgstr "القسم"
+
+#: etablissement/forms.py:16 etablissement/forms.py:42
+msgid "Etablissement Code :"
+msgstr "رمز المؤسسة"
+
+#: etablissement/forms.py:17 etablissement/forms.py:43
+msgid "Etablissement Designation:"
+msgstr "اسم المؤسسة"
+
+#: note/forms.py:16 note/forms.py:54 note/forms.py:91
+msgid "titre de la note:"
+msgstr "عنوان المذكرة"
+
+#: note/forms.py:17 note/forms.py:55 note/forms.py:92
+msgid "date:"
+msgstr "التاريخ "
+
+#: note/forms.py:18 note/forms.py:56 note/forms.py:93
+msgid "note:"
+msgstr "المذكرة"
+
+#: notice/settings.py:92
+msgid "Arabic"
+msgstr ""
+
+#: notice/settings.py:93
+msgid "french"
+msgstr ""

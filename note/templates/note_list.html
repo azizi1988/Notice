@@ -1,0 +1,70 @@
+{% extends 'base.html' %} 
+{% load fontawesome %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+<div class="container"> 
+    <div class="row"> 
+        <!-- Blog Entries Column -->
+        {% for note in all_notes %}
+        <div class="col-md-4 mt-3 left">
+            <div class="card ">
+                <div class="card-body">
+                        {% fontawesome_stylesheet %} 
+                    <h2 class="card-title">{{ note.titre }}</h2>
+                    <p class="card-text text-muted h6">{{ note.classe }}{{note.enseignant}}</p>
+                    <p class="card-text">{{ note.date_note}}</p> <!---->
+                    <iframe src="media/documents" style="width:600px; height:500px;" frameborder="0">{{ note.document}}</iframe>
+                    <!--p class="card-text">{{ note.sujet|slice:":10" }}</p-->
+                    <a href="{% url 'note:note_update' note.id %}" class="btn btn-info">{% fontawesome_icon 'pencil' large=True spin=False color='white' title='Modifier' %} </a>
+                    <a href="{% url 'note:note_delete' note.id %}" class="btn btn-danger">{% fontawesome_icon 'trash' large=True spin=False color='white' title='Modifier' %} </a> 
+                    <a href="{% url 'note:note_read' note.id %}" class="btn btn-secondary">{% fontawesome_icon 'eye' large=True spin=False color='white' title='Lire' %} </a> 
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        
+        {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+    </div>
+    </div>
+    {% if all_notes.has_other_pages %}
+  <ul class="pagination">
+    {% if all_notes.has_previous %}
+      <li><a href="?page={{ all_notes.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in all_notes.paginator.page_range %}
+      {% if all_notes.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if all_notes.has_next %}
+      <li><a href="?page={{ all_notes.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+<style>
+        body {
+            font-family: "Roboto", sans-serif;
+            font-size: 18px;
+            background-color:#fdfdfd;
+        }
+        
+        .head_text {
+            color:white;
+        }
+        
+        .card {
+            box-shadow: 0 16px 48px #E3E7EB;
+        }
+    </style>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% load static %}
+{% load i18n %}
+{% load fontawesome %}
+{% fontawesome_stylesheet %}
+<link rel="stylesheet" type="text/css" href="{% static '/css/navbar_styles.css' %}">
+ <nav class="navbar navbar-expand-lg navbar-light bg-light"> 
+  <!--a class="navbar-brand" href="#">Menu</a-->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-item nav-link active" href="{% url 'home' %}"><span style="font-size: 15px;">{% fontawesome_icon 'home' large=True spin=False color='black' title='Home' %}</span></a> <!--Home <span class="sr-only">(current)</span>-->
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          les Notices
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'note:note_register' %}">Une nouvelle Notices</a>
+          <a class="dropdown-item" href="{% url 'note:note_list' %}">Programme des Notices</a>
+          <div class="dropdown-divider"></div>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Etablissements
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'etablissement:etab_register' %}">nouvelle Etablissement</a>
+          <a class="dropdown-item" href="{% url 'etablissement:etab_list' %}">listes des Etablissements</a>
+          <div class="dropdown-divider"></div>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Classes
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'classe:classe_register' %}">Creation des classes </a>
+            <a class="dropdown-item" href="{% url 'classe:classe_list' %}">liste des classes</a>
+            <div class="dropdown-divider"></div>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Enseignant
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'enseignant:enseignant_register' %}">Nouveau Enseignant</a>
+            <a class="dropdown-item" href="{% url 'enseignant:enseignant_list'%}">Liste des Enseignants</a>
+            <div class="dropdown-divider"></div>
+          </div>
+        </li>
+        <!--<a> class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
+    </ul>
+  <!--/div-->
+    <div class="navbar-nav ml-auto">
+        
+    {% if request.user.is_authenticated %} <!--class="nav-item nav-link"--> 
+    <li class="nav-item2 dropdown ">
+        <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {% fontawesome_icon 'user-circle' large=True spin=False color='black' title='compte' %} {{user.username}}
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item2 nav-link ml-auto "  href="{% url 'compte:logout' %}">{% fontawesome_icon 'power-off' large=True spin=False color='red' title='Home' %} Déconnecter</a>
+          <div class="dropdown-divider"></div>
+        </div>
+      </li>
+    {% else %}
+    <a class="nav-item nav-link" href="{% url 'compte:login' %}">{% fontawesome_icon 'sign-in-alt' large=True spin=False color='red' title='Home' %} Connecter</a>
+    {% endif %}
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}  
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% load crispy_forms_tags %}
+{% bootstrap_javascript jquery='full' %}
+{% block content %}
+{{ form.media }}
+{% csrf_token %}
+{% crispy form %}
+<form method="post" enctype="multipart/form-data">
+    {#% csrf_token %#}
+    <input type="file" name="document">
+    <button type="submit">Upload</button>
+  </form>
+
+  {#% if uploaded_file_url %#}
+    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+  {#% endif %#}
+
+  <p><a href="{% url 'home' %}">Return to home</a></p>
+{% endblock %} 

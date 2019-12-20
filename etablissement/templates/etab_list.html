@@ -1,0 +1,67 @@
+{% extends 'base.html' %} 
+{% load fontawesome %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+<div class="container"> 
+    <div class="row"> 
+        <!-- Blog Entries Column -->
+        {% for etablissement in all_etablissements %}
+        <div class="col-md-4 mt-3 left">
+            <div class="card ">
+                <div class="card-body">
+                        {% fontawesome_stylesheet %} 
+                    <h2 class="card-title">{{ etablissement.etablissement_desig}}</h2>
+                    <p class="card-text text-muted h6">{{ etablissement.etablissement_code}}</p>
+                    <a href="{% url 'etablissement:etab_update' etablissement.id %}" class="btn btn-info">{% fontawesome_icon 'pencil' large=True spin=False color='white' title='Modifier' %} </a>
+                    <a href="{% url 'etablissement:etab_delete' etablissement.id %}" class="btn btn-danger">{% fontawesome_icon 'trash' large=True spin=False color='white' title='Modifier' %} </a> 
+                    <a href="{% url 'classe:classe_listing' etablissement.id %}" class="btn btn-warning">{% fontawesome_icon 'eye' large=True spin=False color='white' title='les classes' %} </a> 
+                  </div>
+            </div>
+        </div>
+        {% endfor %}
+        
+        {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+    </div>
+    </div>
+    {% if all_etablissements.has_other_pages %}
+  <ul class="pagination">
+    {% if all_etablissements.has_previous %}
+      <li><a href="?page={{ all_notes.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in all_etablissements.paginator.page_range %}
+      {% if all_etablissements.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if all_etablissements.has_next %}
+      <li><a href="?page={{ all_notes.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+<style>
+        body {
+            font-family: "Roboto", sans-serif;
+            font-size: 18px;
+            background-color:#fdfdfd;
+        }
+        
+        .head_text {
+            color:white;
+        }
+        
+        .card {
+            box-shadow: 0 16px 48px #E3E7EB;
+        }
+    </style>
+{% endblock %}
